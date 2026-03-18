@@ -69,7 +69,9 @@ export const useResumeStore = create<ResumeState>((set) => ({
             certifications: content.certifications ?? [],
             sectionOrder:
               content.sectionOrder?.length ?? 0
-                ? [...new Set([...DEFAULT_SECTION_ORDER, ...content.sectionOrder])]
+                ? Array.from(
+                    new Set([...DEFAULT_SECTION_ORDER, ...content.sectionOrder])
+                  )
                 : defaultResumeContent.sectionOrder,
           }
         : { ...defaultResumeContent },

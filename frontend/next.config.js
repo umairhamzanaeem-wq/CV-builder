@@ -1,9 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
+    const backendUrl =
+      process.env.BACKEND_URL ||
+      process.env.NEXT_PUBLIC_API_URL ||
+      "http://127.0.0.1:8000";
+
     return [
-      // Use 127.0.0.1 to avoid IPv6 (::1) connection refused when backend is on IPv4
-      { source: '/api/proxy/:path*', destination: 'http://127.0.0.1:8000/:path*' },
+      // Local dev defaults to localhost backend. In production, set BACKEND_URL on Vercel.
+      { source: "/api/proxy/:path*", destination: `${backendUrl}/:path*` },
     ];
   },
 };

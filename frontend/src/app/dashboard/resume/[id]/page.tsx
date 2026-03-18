@@ -57,12 +57,11 @@ export default function ResumeEditorPage() {
   useEffect(() => { loadResume(); }, [loadResume]);
 
   useEffect(() => {
-    if (!content) return;
     const order = content.sectionOrder?.length ? content.sectionOrder : SECTION_ORDER;
     if (!order.includes(activeSection)) {
       setActiveSection(order[0]);
     }
-  }, [content?.sectionOrder, activeSection]);
+  }, [content.sectionOrder, activeSection]);
 
   async function handleSave() {
     if (!id || isNaN(id)) return;
