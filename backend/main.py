@@ -21,9 +21,19 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+import os
+
+allowed_origins = [
+    "http://localhost:3000",
+    "https://cv-builder-pi.vercel.app",
+]
+extra = os.getenv("FRONTEND_URL")
+if extra:
+    allowed_origins.append(extra)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
